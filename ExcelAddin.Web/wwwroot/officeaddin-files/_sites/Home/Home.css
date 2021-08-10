@@ -1,0 +1,79 @@
+﻿#content-header {
+    background: #2a8dd4;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+}
+
+#content-main {
+    background: #fff;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+.padding {
+    padding: 15px;
+}
+
+.container {
+    width: 300px;
+    border: 1px solid #0000001f;
+}
+
+.title, .content {
+    border-bottom: 1px solid #0000001f;
+    padding: 20px;
+}
+
+    .title p {
+        color: #263f7bbd;
+        font-size: 15px;
+        margin: 0;
+    }
+
+    .title h3 {
+        color: #2b56bf;
+        margin: 0;
+    }
+
+    .content label {
+        color: #263f7bbd;
+    }
+
+    .content textarea {
+        width: 100%;
+        border-color: #0000001f;
+        margin-top: 5px;
+        font-size: 18px;
+        padding: 10px;
+    }
+
+
+.button {
+    padding: 10px 20px;
+    text-align: right;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 0.8em;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    background-color: #2b56bf
+}
+
+.button .cancel {
+    background-color: white;
+    color: grey;
+    border: 1px solid #0000001f;
+}
