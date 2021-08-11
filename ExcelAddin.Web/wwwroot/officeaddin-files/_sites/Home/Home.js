@@ -11,12 +11,29 @@
                 return addReviewNote(value);
             });
 
-            $("#add-comments").on("click", function () {
-                var value = $("#review-comments-value").val();
-                return callApi(value);
+            $("#add-comments").on("click", async function () {
+                var valueContent = $("#review-comments-value").val();
+                return getFileUrl(valueContent);
+                //return callApi(fileName);
             });
         });
     });
+
+    async function getFileUrl(valueContent) {
+        //Get the URL of the current file.
+        await Office.context.document.getFilePropertiesAsync(function (asyncResult) {
+            var fileUrl = asyncResult.value.url;
+
+            const a = "https://pod3.sharepoint.com/sites/Local-AAAAAA-73e29943-8bd6-48c1-84cd-4e2f1a2dd833/302f6ca1-007b-469a-9ba3-a6121f034018/Shared Documents/Office Working Paper/Test 123.xlsx"
+            const [http, empty, domain, site, siteCollection, subsite, document, folder, filename] = fileUrl.split('/');
+            var obj = {
+                EngagementId: subsite,
+                FileName: filename,
+                Content: valueContent
+            };
+            return callApi(obj);
+        });
+    }
 
     async function addReviewNote(value) {
         await Excel.run(async (context) => {
@@ -26,7 +43,7 @@
         });
     }
 
-    async function callApi(value) {
+    async function callApi(obj) {
         $.ajax({
             url: "/api/ReviewNote/addReviewNote",
             type: "POST",
@@ -34,15 +51,15 @@
             data: JSON.stringify({
                 Payload:
                 {
-                    EngagementId: "302F6CA1-007B-469A-9BA3-A6121F034018",
-                    TodoID: "759D2910-C9F2-4BBA-9BAF-243A7DD51D1E",
-                    Content: value
+                    EngagementId: obj.EngagementId,
+                    FileName: obj.FileName,
+                    Content: obj.Content
                 }
             }),
             dataType: 'json',
             success: async function (response) {
                 if (response == true) {
-                    await addReviewComments(value);
+                    await addReviewComments(obj.Content);
                 }
             },
             error: function () {

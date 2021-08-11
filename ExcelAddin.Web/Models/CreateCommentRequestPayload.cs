@@ -6,7 +6,7 @@ namespace ExcelAddin.Web.Models
     {
         public Guid? EngagementId { get; set; }
 
-        public Guid? TodoID { get; set; }
+        public string FileName { get; set; }
 
         public string Content { get; set; }
     }
